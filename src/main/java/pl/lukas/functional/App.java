@@ -7,14 +7,21 @@ public class App {
         Runnable r = new Runnable() {
             @Override
             public void run() {
+                System.out.println("A");
             }
         };
 
-        Comparable<String> s = new Comparable<String>() {
+        Runnable ru = () -> System.out.println("A");
+
+        Comparable<String> c = new Comparable<String>() {
             @Override
             public int compareTo(String o) {
                 return 0;
             }
         };
+
+        Comparable<String> co =  o -> 0;
+
+        Movable m = direction -> 11;
     }
 }
