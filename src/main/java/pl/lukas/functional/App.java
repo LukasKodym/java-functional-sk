@@ -1,7 +1,6 @@
 package pl.lukas.functional;
 
 import pl.lukas.functional.domain.Student;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,7 +16,6 @@ public class App {
 
         filterStudents(students, isBilly);
         filterStudents(students, over20);
-
     }
 
     private static List<Student> filterStudents(List<Student> students, Predicate<Student> predicate) {
