@@ -14,10 +14,12 @@ public class App {
 
         Predicate<Student> over20 = student -> student.getAge() >= 20;
 
-        Consumer<Student> consumer = student -> System.out.println(student.getName());
+        Consumer<Student> printStudentName = student -> System.out.println(student.getName());
+        Consumer<Student> printStudentNameUppercase = student -> System.out.println(student.getName().toUpperCase());
 
-        filterStudents(students, over20);
-        consumeStudents(students, consumer);
+        Consumer<Student> studentConsumer = printStudentName.andThen(printStudentNameUppercase);
+
+        consumeStudents(filterStudents(students, over20), studentConsumer);
     }
 
     private static void consumeStudents(List<Student> students, Consumer<Student> consumer) {
