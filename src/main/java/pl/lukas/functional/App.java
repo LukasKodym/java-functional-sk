@@ -5,21 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class App {
 
     public static void main(String[] args) {
 
-        List<Student> students = createData();
-
         Predicate<Student> over20 = student -> student.getAge() >= 20;
-
         Consumer<Student> printStudentName = student -> System.out.println(student.getName());
-        Consumer<Student> printStudentNameUppercase = student -> System.out.println(student.getName().toUpperCase());
+        Supplier<List<Student>> supplyPredefinedStudents = () -> createData();
 
-        Consumer<Student> studentConsumer = printStudentName.andThen(printStudentNameUppercase);
-
-        consumeStudents(filterStudents(students, over20), studentConsumer);
+        consumeStudents(filterStudents(supplyPredefinedStudents, over20), printStudentName);
     }
 
     private static void consumeStudents(List<Student> students, Consumer<Student> consumer) {
@@ -28,8 +24,9 @@ public class App {
         }
     }
 
-    private static List<Student> filterStudents(List<Student> students, Predicate<Student> predicate) {
+    private static List<Student> filterStudents(Supplier<List<Student>> supplier, Predicate<Student> predicate) {
         List<Student> result = new ArrayList<>();
+        List<Student> students = supplier.get();
         for (Student s : students) {
             if (predicate.test(s)) {
                 result.add(s);
