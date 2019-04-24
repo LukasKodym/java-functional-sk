@@ -3,31 +3,26 @@ package pl.lukas.functional;
 import pl.lukas.functional.domain.Student;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class App {
 
     public static void main(String[] args) {
 
-        Predicate<Student> over20 = student -> student.getAge() >= 20;
-        Consumer<Student> printStudentName = student -> System.out.println(student.getName());
-        Supplier<List<Student>> supplyPredefinedStudents = () -> createData();
-        Function<Student,String> function = new Function<Student, String>() {
-            @Override
-            public String apply(Student student) {
-                return null;
-            }
-        };
+        Predicate<Student> over20 = student -> student.getAge() >= 20; // take object, return boolean
+        Consumer<String> print = text -> System.out.println(text); // take object, return nothing
+        Supplier<List<Student>> supplyPredefinedStudents = () -> createData(); // take nothing, return object
+        Function<Student, String> getStudentName = student -> student.getName(); // take object first type, return object another type
 
-        consumeStudents(filterStudents(supplyPredefinedStudents, over20), printStudentName);
+        consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
+
     }
 
-    private static void consumeStudents(List<Student> students, Consumer<Student> consumer) {
+    private static void consumeStudents(List<Student> students,
+                                        Function<Student, String> function,
+                                        Consumer<String> consumer) {
         for (Student s : students) {
-            consumer.accept(s);
+            consumer.accept(function.apply(s));
         }
     }
 
