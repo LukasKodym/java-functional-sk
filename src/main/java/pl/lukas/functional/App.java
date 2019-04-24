@@ -4,6 +4,7 @@ import pl.lukas.functional.domain.Student;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
@@ -14,6 +15,12 @@ public class App {
         Predicate<Student> over20 = student -> student.getAge() >= 20;
         Consumer<Student> printStudentName = student -> System.out.println(student.getName());
         Supplier<List<Student>> supplyPredefinedStudents = () -> createData();
+        Function<Student,String> function = new Function<Student, String>() {
+            @Override
+            public String apply(Student student) {
+                return null;
+            }
+        };
 
         consumeStudents(filterStudents(supplyPredefinedStudents, over20), printStudentName);
     }
