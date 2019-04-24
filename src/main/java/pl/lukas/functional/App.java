@@ -12,26 +12,28 @@ public class App {
 
         List<Student> students = createData();
 
-
-        getBillies(students);
-        getOver20(students);
-
-    }
-
-    private static List<Student> getOver20(List<Student> students) {
-        List<Student> result = new ArrayList<>();
-        for (Student s : students) {
-            if (s.getAge() >= 20) {
-                result.add(s);
+        Predicate<Student> isBilly = new Predicate<Student>() {
+            @Override
+            public boolean test(Student student) {
+                return student.getName().equals("Billy");
             }
-        }
-        return result;
+        };
+
+        Predicate<Student> over20 = new Predicate<Student>() {
+            @Override
+            public boolean test(Student student) {
+                return student.getAge() >= 20;
+            }
+        };
+        filterStudents(students, isBilly);
+        filterStudents(students, over20);
+
     }
 
-    private static List<Student> getBillies(List<Student> students) {
+    private static List<Student> filterStudents(List<Student> students, Predicate<Student> predicate) {
         List<Student> result = new ArrayList<>();
         for (Student s : students) {
-            if (s.getName().equals("Billy")) {
+            if (predicate.test(s)) {
                 result.add(s);
             }
         }
