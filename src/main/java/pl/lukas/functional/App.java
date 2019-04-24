@@ -12,19 +12,9 @@ public class App {
 
         List<Student> students = createData();
 
-        Predicate<Student> isBilly = new Predicate<Student>() {
-            @Override
-            public boolean test(Student student) {
-                return student.getName().equals("Billy");
-            }
-        };
+        Predicate<Student> isBilly = student -> student.getName().equals("Billy");
+        Predicate<Student> over20 = student -> student.getAge() >= 20;
 
-        Predicate<Student> over20 = new Predicate<Student>() {
-            @Override
-            public boolean test(Student student) {
-                return student.getAge() >= 20;
-            }
-        };
         filterStudents(students, isBilly);
         filterStudents(students, over20);
 
