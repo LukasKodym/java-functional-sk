@@ -3,6 +3,7 @@ package pl.lukas.functional;
 import pl.lukas.functional.domain.Student;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class App {
@@ -11,11 +12,18 @@ public class App {
 
         List<Student> students = createData();
 
-        Predicate<Student> isBilly = student -> student.getName().equals("Billy");
         Predicate<Student> over20 = student -> student.getAge() >= 20;
 
-        filterStudents(students, isBilly);
+        Consumer<Student> consumer = student -> System.out.println(student.getName());
+
         filterStudents(students, over20);
+        consumeStudents(students, consumer);
+    }
+
+    private static void consumeStudents(List<Student> students, Consumer<Student> consumer) {
+        for (Student s : students) {
+            consumer.accept(s);
+        }
     }
 
     private static List<Student> filterStudents(List<Student> students, Predicate<Student> predicate) {
