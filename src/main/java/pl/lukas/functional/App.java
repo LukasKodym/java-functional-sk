@@ -16,7 +16,7 @@ public class App {
 
         Consumer<String> stringConsumer = App::testMe;
 
-        BiFunction<Student,String, Student> changeIndex = (student, indexNumber) -> student.changeIndexNumber(indexNumber);
+        BiFunction<Student,String, Student> changeIndex = Student::changeIndexNumber;
 
         consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
 
