@@ -14,8 +14,6 @@ public class App {
         Supplier<List<Student>> supplyPredefinedStudents = App::createData; // take nothing, return object
         Function<Student, String> getStudentName = Student::getName; // take object first type, return object another type
 
-        Consumer<String> stringConsumer = App::testMe;
-
         BiFunction<Student,String, Student> changeIndex = Student::changeIndexNumber;
 
         consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
@@ -47,9 +45,5 @@ public class App {
         result.add(new Student("John", 21, "74568"));
         result.add(new Student("Billy", 19, "78956"));
         return result;
-    }
-
-    public static void testMe(String x) {
-
     }
 }
