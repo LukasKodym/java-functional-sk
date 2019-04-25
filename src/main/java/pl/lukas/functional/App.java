@@ -10,9 +10,18 @@ public class App {
     public static void main(String[] args) {
 
         Predicate<Student> over20 = student -> student.getAge() >= 20; // take object, return boolean
-        Consumer<String> print = text -> System.out.println(text); // take object, return nothing
-        Supplier<List<Student>> supplyPredefinedStudents = () -> createData(); // take nothing, return object
-        Function<Student, String> getStudentName = student -> student.getName(); // take object first type, return object another type
+        Consumer<String> print = System.out::println; // take object, return nothing
+        Supplier<List<Student>> supplyPredefinedStudents = App::createData; // take nothing, return object
+        Function<Student, String> getStudentName = Student::getName; // take object first type, return object another type
+
+        Consumer<String> stringConsumer = App::testMe;
+
+        BiFunction<Student,String, Student> changeIndex = new BiFunction<Student, String, Student>() {
+            @Override
+            public Student apply(Student student, String indexNumber) {
+                return student.changeIndexNumber(indexNumber);
+            }
+        };
 
         consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
 
@@ -43,5 +52,9 @@ public class App {
         result.add(new Student("John", 21, "74568"));
         result.add(new Student("Billy", 19, "78956"));
         return result;
+    }
+
+    public static void testMe(String x) {
+
     }
 }
