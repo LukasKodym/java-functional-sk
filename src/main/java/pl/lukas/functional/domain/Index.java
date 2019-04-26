@@ -10,4 +10,10 @@ final public class Index {
     public Index(String name) {
         this.name = name;
     }
+
+    public String getIndexNumber() {
+
+        return this.name;
+
+    }
 }
