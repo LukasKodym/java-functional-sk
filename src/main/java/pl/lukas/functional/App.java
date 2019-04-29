@@ -11,9 +11,6 @@ public class App {
 
         Predicate<Student> over20 = student -> student.getAge() >= 20; // take object, return boolean
         Consumer<String> print = System.out::println; // take object, return nothing
-//        Supplier<List<Student>> supplyPredefinedStudents = App::createData; // take nothing, return object
-
-//        createDataStream().filter(over20).map(getStudentName).forEach(print);
 
         createDataStream()
                 .filter(over20)
@@ -22,6 +19,12 @@ public class App {
                 .map(String::toUpperCase)
                 .forEach(System.out::println);
 
+        createDataStream()
+                .map(student -> student.getIndex())
+                .filter(optionalIndex -> optionalIndex .isPresent())
+                .map(optionalIndex -> optionalIndex .get())
+                .map(index -> index.getIndexNumber())
+                .forEach(System.out::println);
 
     }
 
