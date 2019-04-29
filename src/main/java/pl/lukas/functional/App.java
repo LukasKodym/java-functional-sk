@@ -13,22 +13,14 @@ public class App {
         Predicate<Student> over20 = student -> student.getAge() >= 20; // take object, return boolean
         Consumer<String> print = System.out::println; // take object, return nothing
 
-        StringBuilder sb = new StringBuilder("");
 
-        createDataStream()
-                .filter(over20)
-                .map(Student::getName)
-                .findFirst()
-                .ifPresent(s -> System.out.println("mamy studenta po 20 roku życia"));
+        Double sumOfRandomDoubles = Stream
+                .generate(Math::random)
+                .limit(10)
+                .reduce(0.0, (aDouble, aDouble2) -> aDouble + aDouble2);
 
-        boolean bi = createDataStream()
-                .map(Student::getName)
-                .anyMatch(s -> s.startsWith("Bi"));
-
-        boolean b = createDataStream()
-                .map(Student::getAge)
-                .allMatch(age -> age > 20);
-
+        Optional<Integer> maxAgeOfStudent = createDataStream().map(Student::getAge).reduce((x, y) -> x > y ? x : y);
+        maxAgeOfStudent.ifPresent(System.out::println);
     }
 
     private static Stream<Student> createDataStream() {
