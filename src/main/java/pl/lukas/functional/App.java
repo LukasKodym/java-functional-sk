@@ -19,24 +19,12 @@ public class App {
         BiFunction<Student,String, Student> changeIndex = Student::changeIndexNumber;
 
 
-        consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
+//        consumeStudents(filterStudents(supplyPredefinedStudents, over20), getStudentName, print);
 
-        Student student = supplyPredefinedStudents.get().get(0);
-
-        Optional<Index> index = student.getIndex();
-
-        if (index.isPresent()) {
-            System.out.println(index.get().getIndexNumber());
-        }
+        List<Student> students = supplyPredefinedStudents.get();
+        students.stream().filter(over20).map(getStudentName).forEach(print);
 
 
-        index.ifPresent(i -> System.out.println(i.getIndexNumber()));
-
-        index.filter(i -> i.getIndexNumber().equals("12345"));
-
-        index.map(i -> i.getIndexNumber())
-                .filter(indexNumber -> indexNumber.equals("12345"))
-                .ifPresent(indexNumber -> System.out.println(indexNumber));
     }
 
     private static void consumeStudents(List<Student> students,
