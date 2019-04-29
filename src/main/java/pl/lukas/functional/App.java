@@ -39,12 +39,9 @@ public class App {
 
         Map<Integer, List<Student>> studentsByAge = createDataStream().collect(groupingBy(Student::getAge));
 
-        studentsByAge.forEach(new BiConsumer<Integer, List<Student>>() {
-            @Override
-            public void accept(Integer integer, List<Student> students) {
-                System.out.println(integer);
-                students.stream().map(Student::getName).forEach(System.out::println);
-            }
+        studentsByAge.forEach((integer, students) -> {
+            System.out.println(integer);
+            students.stream().map(Student::getName).forEach(System.out::println);
         });
     }
 
