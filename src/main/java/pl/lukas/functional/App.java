@@ -13,12 +13,19 @@ public class App {
         Predicate<Student> over20 = student -> student.getAge() >= 20; // take object, return boolean
         Consumer<String> print = System.out::println; // take object, return nothing
 
+        StringBuilder sb = new StringBuilder("");
+
         createDataStream()
                 .filter(over20)
                 .map(Student::getName)
                 .filter(name -> name.startsWith("Billy"))
                 .map(String::toUpperCase)
-                .forEach(System.out::println);
+                .forEach(new Consumer<String>() {
+                    @Override
+                    public void accept(String s) {
+                        sb.append(s);
+                    }
+                });
 
         createDataStream()
                 .map(Student::getIndex)
