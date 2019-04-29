@@ -18,16 +18,17 @@ public class App {
         createDataStream()
                 .filter(over20)
                 .map(Student::getName)
-                .filter(name -> name.startsWith("Billy"))
-                .map(String::toUpperCase)
-                .forEach(sb::append);
+                .findFirst()
+                .ifPresent(s -> System.out.println("mamy studenta po 20 roku życia"));
 
-        createDataStream()
-                .map(Student::getIndex)
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .map(Index::getIndexNumber)
-                .forEach(System.out::println);
+        boolean bi = createDataStream()
+                .map(Student::getName)
+                .anyMatch(s -> s.startsWith("Bi"));
+
+        boolean b = createDataStream()
+                .map(Student::getAge)
+                .allMatch(age -> age > 20);
+
     }
 
     private static Stream<Student> createDataStream() {
