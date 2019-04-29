@@ -47,13 +47,6 @@ public class App {
         return result;
     }
 
-    private static List<Student> createData() {
-        List<Student> result = new ArrayList<>();
-        result.add(new Student("Pawel", 23, "69874"));
-        result.add(new Student("John", 21, "74568"));
-        result.add(new Student("Billy", 19, "78956"));
-        return result;
-    }
 
     private static Stream<Student> createDataStream() {
         Student pawel = new Student("Pawel", 23, "69874"));
