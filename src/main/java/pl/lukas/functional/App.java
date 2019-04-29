@@ -20,12 +20,7 @@ public class App {
                 .map(Student::getName)
                 .filter(name -> name.startsWith("Billy"))
                 .map(String::toUpperCase)
-                .forEach(new Consumer<String>() {
-                    @Override
-                    public void accept(String s) {
-                        sb.append(s);
-                    }
-                });
+                .forEach(sb::append);
 
         createDataStream()
                 .map(Student::getIndex)
