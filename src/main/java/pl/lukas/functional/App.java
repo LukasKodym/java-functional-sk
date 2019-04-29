@@ -1,10 +1,8 @@
 package pl.lukas.functional;
 
-import pl.lukas.functional.domain.Index;
 import pl.lukas.functional.domain.Student;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.*;
 
 public class App {
