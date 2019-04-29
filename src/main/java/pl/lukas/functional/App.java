@@ -1,27 +1,16 @@
 package pl.lukas.functional;
 
 import pl.lukas.functional.domain.Student;
-
-import java.util.Comparator;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class App {
 
     public static void main(String[] args) {
 
-//        createDataStream().limit(3).map(Student::getIndexNumber).forEach(System.out::println);
-//        createDataStream().skip(3).map(Student::getIndexNumber).forEach(System.out::println);
-//        createDataStream().distinct().map(Student::getName).forEach(System.out::println); // pass only unique values
-//        createDataStream().sorted().map(Student::getName).forEach(System.out::println);
-        createDataStream().sorted(Comparator.comparingInt(Student::getAge))
-                .map(Student::getName)
-                .forEach(System.out::println);
+        IntStream intStream = createDataStream().map(Student::getAge).mapToInt(Integer::intValue);
 
-        long count = createDataStream().sorted(Comparator.comparingInt(Student::getAge))
-                .map(Student::getName)
-                .count();
-        System.out.println(count);
-
+        intStream.sorted().forEach(System.out::println);
     }
 
     private static Stream<Student> createDataStream() {

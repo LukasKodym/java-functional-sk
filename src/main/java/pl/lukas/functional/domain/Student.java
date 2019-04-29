@@ -1,7 +1,6 @@
 package pl.lukas.functional.domain;
 
 import lombok.Getter;
-
 import java.util.Objects;
 import java.util.Optional;
 
