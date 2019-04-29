@@ -1,9 +1,12 @@
 package pl.lukas.functional;
 
 import pl.lukas.functional.domain.Student;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class App {
 
@@ -50,5 +53,12 @@ public class App {
         result.add(new Student("John", 21, "74568"));
         result.add(new Student("Billy", 19, "78956"));
         return result;
+    }
+
+    private static Stream<Student> createDataStream() {
+        Student pawel = new Student("Pawel", 23, "69874"));
+        Student john = (new Student("John", 21, "74568"));
+        Student billy = (new Student("Billy", 19, "78956"));
+        return Stream.of(pawel, john, billy);
     }
 }
