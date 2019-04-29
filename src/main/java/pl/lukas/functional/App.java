@@ -1,5 +1,6 @@
 package pl.lukas.functional;
 
+import com.sun.javafx.binding.IntegerConstant;
 import pl.lukas.functional.domain.Index;
 import pl.lukas.functional.domain.Student;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class App {
                 .limit(10)
                 .reduce(0.0, (aDouble, aDouble2) -> aDouble + aDouble2);
 
-        Optional<Integer> maxAgeOfStudent = createDataStream().map(Student::getAge).reduce((x, y) -> x > y ? x : y);
+        Optional<Integer> maxAgeOfStudent = createDataStream().map(Student::getAge).reduce(Integer::max);
         maxAgeOfStudent.ifPresent(System.out::println);
     }
 
