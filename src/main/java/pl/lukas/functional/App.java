@@ -1,7 +1,9 @@
 package pl.lukas.functional;
 
+import pl.lukas.functional.domain.Index;
 import pl.lukas.functional.domain.Student;
 
+import java.util.Optional;
 import java.util.function.*;
 import java.util.stream.Stream;
 
@@ -20,10 +22,10 @@ public class App {
                 .forEach(System.out::println);
 
         createDataStream()
-                .map(student -> student.getIndex())
-                .filter(optionalIndex -> optionalIndex .isPresent())
-                .map(optionalIndex -> optionalIndex .get())
-                .map(index -> index.getIndexNumber())
+                .map(Student::getIndex)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .map(Index::getIndexNumber)
                 .forEach(System.out::println);
 
     }
